@@ -1,24 +1,8 @@
-# 96board-poplar-bare-led
+# 96board-poplar-bare_aarch64
 
 这是在96board poplar 单板上的裸机层序。
 poplar单板是基于华为Hi2798CV200CPU设计的机顶盒开发主板，可以从下面的链接购买：
 https://item.taobao.com/item.htm?spm=a1z10.1-c.w13619360-16022635001.8.77020cc8Q0MXAG&id=537581702687
-
-led_on branch演示用汇编程序点亮D16灯
-
-led_on_c branch演示用c程序点亮板上的6个LED灯，并使其闪烁
-
-uart branch演示用c语言接收和发送串口输入和输出
-
-printf branch 演示格式化打印输出
-
-timer branch演示如何计时
-
-irq branch演示如何设置中断向量以及实现了定时器中断和GPIO中断
-
-emmc branch演示如何对EMMC进行读写操作，并将boot.img读入内存
-
-miniboot 演示如何读取环境变量及引导andorid linux kernel
 
 编译工具：
 wget https://releases.linaro.org/components/toolchain/binaries/7.1-2017.08/arm-linux-gnueabi/gcc-linaro-7.1.1-2017.08-x86_64_arm-linux-gnueabi.tar.xz
@@ -50,8 +34,8 @@ The location of BOOT_[0..2].reg blocks are defined by the address stored at offs
 
 Once the BootROM has executed the AUXCODE initialization binary, it loads the rest of the file in DDR for execution.
 
-The location in DDR where the binary shall be placed is written at CONFIG_BOOT_STORE_ADDR_POS and its value defined by CONFIG_BOOT_STORE_ADDR_VAL. （当使用Hitool下载fastboot.bin，fastboot.bin代码将被下载到CONFIG_BOOT_STRORE_ADDR_VAL地址，然后跳转到CONFIG_BOOT_STRORE_ADDR_VAL+0x6500处执行。）
-bigfish/sdk/source/boot/fastboot/include/configs/hi3798cv2x.h:
+The location in DDR where the binary shall be placed is written at CONFIG_BOOT_STORE_ADDR_POS and its value defined by CONFIG_BOOT_STORE_ADDR_VAL.
+
 #define  CONFIG_BOOT_STRORE_ADDR_VAL   0x01000000
 
 当从USB或EMMC启动时，从.=CONFIG_CHECKED_AREA_START开始的代码将被拷贝到CONFIG_BOOT_ENTRY_POS定义的内存，然后开始执行。
