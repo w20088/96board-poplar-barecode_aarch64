@@ -1,0 +1,21 @@
+OUTPUT_FORMAT("elf64-littleaarch64")
+OUTPUT_ARCH(aarch64)
+ENTRY(bl1_entrypoint)
+
+SECTIONS
+{
+	. = (0x02001000 + (0x0000D000)); 
+	.text	:
+	{
+                *bl1_entrypoint.o(.text*)
+		*(.text)
+		*(.rodata)
+	}
+
+	. = ALIGN(16);
+	.data : { *(.data) }
+
+	. = ALIGN(16);
+	.bss : { *(.bss) }
+
+}
